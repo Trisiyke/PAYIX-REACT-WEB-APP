@@ -1,0 +1,138 @@
+
+
+.scroll {
+  position: relative;
+  margin: 0 60px;
+}
+
+/* Pinned frame: stays on screen while the tall section scrolls */
+.scroll-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+/* ---------- Text column ---------- */
+.scroll-1 {
+  flex: 1;
+}
+
+.scroll-1 ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.scroll-1 li {
+  padding: 18px 0 18px 20px;
+  border-left: 3px solid transparent;
+  opacity: 0.3;
+  cursor: pointer;
+  transition: opacity 0.5s ease, border-color 0.5s ease, transform 0.5s ease;
+}
+
+.scroll-1 li.active {
+  opacity: 1;
+  border-left-color: #0b5ed7;   /* your brand colour */
+  transform: translateX(8px);
+}
+
+.scroll-1 h2 {
+  font-size: 25px;
+  margin: 0 0 8px;
+}
+
+.scroll-1 p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* ---------- Image column: all images stacked, one visible ---------- */
+.scroll-2 {
+  flex: 0 0 60%;
+  position: relative;
+  height: 70vh;
+}
+
+.scroll-2 img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+
+  opacity: 0;
+  transform: scale(1.06) translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  pointer-events: none;
+}
+
+.scroll-2 img.active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 992px) {
+  .scroll {
+    margin: 0 30px;
+  }
+  .scroll-sticky {
+    gap: 30px;
+  }
+  .scroll-2 {
+    flex: 0 0 55%;
+  }
+}
+
+/* ---------- Mobile: text on top, image below ---------- */
+@media (max-width: 700px) {
+  .scroll {
+    margin: 0 16px;
+  }
+
+  .scroll-sticky {
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .scroll-1 {
+    flex: none;
+    width: 100%;
+  }
+
+  /* show only the active item to save space */
+  .scroll-1 li {
+    display: none;
+    padding-left: 12px;
+  }
+  .scroll-1 li.active {
+    display: block;
+    transform: none;
+  }
+
+  .scroll-1 h2 {
+    font-size: 20px;
+  }
+
+  .scroll-2 {
+    flex: none;
+    width: 100%;
+    height: 45vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-1 li,
+  .scroll-2 img {
+    transition: none;
+  }
+}

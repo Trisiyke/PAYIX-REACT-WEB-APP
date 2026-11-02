@@ -1,0 +1,82 @@
+
+.testimonial {
+  margin: 20px 60px;
+  overflow: hidden; /* hides the cards that run past the edges */
+
+  /* fades the left and right edges like your sample */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.testimonial-track {
+  display: flex;
+  align-items: stretch;      /* every card gets the same height */
+  width: max-content;
+  animation: testimonial-scroll 40s linear infinite;
+}
+
+.testimonial-track:hover {
+  animation-play-state: paused;
+}
+
+.testimonial-card {
+  flex: 0 0 420px;           /* fixed width, never shrinks */
+  box-sizing: border-box;
+  margin-right: 24px;        /* margin (not gap) keeps the loop seamless */
+  padding: 32px 40px;
+  background: #fff;
+  border: 1px solid #e8ebf3;
+  border-radius: 12px;
+}
+
+.testimonial-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.testimonial-head img {
+  flex-shrink: 0;            /* stops the avatar from being squashed */
+  width: 70px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #052097;
+  transition: transform 0.3s ease-in-out;
+}
+
+.testimonial-head img:hover {
+  transform: scale(1.1);
+}
+
+.testimonial-head h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 650;
+  color: #052097;
+}
+
+.testimonial-card p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #222;
+}
+
+@keyframes testimonial-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* exactly one full set of cards */
+}
+
+/* respect users who turn off animations */
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-track { animation: none; }
+  .testimonial { overflow-x: auto; }
+}
+
+/* smaller screens */
+@media (max-width: 600px) {
+  .testimonial { margin: 20px 16px; }
+  .testimonial-card { flex-basis: 300px; padding: 24px; }
+}
